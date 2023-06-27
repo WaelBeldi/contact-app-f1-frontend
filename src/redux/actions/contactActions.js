@@ -5,7 +5,7 @@ export const getContacts = () => async (dispatch) => {
   dispatch({type: GET_CONTACT_LOAD})
   try {
     const result = await axios.get("/api/contact")
-    console.log(result)
+    // console.log(result.data)
     dispatch({type: GET_CONTACT_SUCCESS, payload: result.data.response})
   } catch (error) {
     dispatch({type: GET_CONTACT_FAIL, payload: error})
@@ -17,6 +17,7 @@ export const getContact = (id) => async (dispatch) => {
   try {
     const result = await axios.get(`/api/contact/${id}`)
     dispatch({type: GET_CONTACT, payload: result.data.response})
+
   } catch (error) {
     console.log(error)
   }

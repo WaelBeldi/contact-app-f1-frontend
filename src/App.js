@@ -17,7 +17,9 @@ function App() {
   const getUser = () => dispatch(getAuthUser())
 
   useEffect(()=>{
-    getUser()
+    if(localStorage.getItem("token")){
+      getUser()
+    }
   },[])
   return (
     <div className="">
