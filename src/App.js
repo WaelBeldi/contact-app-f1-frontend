@@ -1,23 +1,35 @@
-import logo from './logo.svg';
+import { Route, Routes } from 'react-router-dom';
 import './App.css';
+import NavBar from './components/NavBar';
+import Home from "./components/Home"
+import ContactList from "./components/ContactList"
+import AddEdit from "./components/AddEdit"
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Profile from './components/Profile';
+import PrivateRoute from './components/PrivateRoute';
+import { useDispatch } from 'react-redux';
+import { getAuthUser } from './redux/actions/authActions';
+import { useEffect } from 'react';
 
 function App() {
+  const dispatch = useDispatch();
+  const getUser = () => dispatch(getAuthUser())
+
+  useEffect(()=>{
+    getUser()
+  },[])
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="">
+      <NavBar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/contact_list" element={<PrivateRoute><ContactList /></PrivateRoute>} />
+        <Route path="/add" element={<PrivateRoute><AddEdit /></PrivateRoute>} />
+        <Route path="/edit/:id" element={<PrivateRoute><AddEdit /></PrivateRoute>} />
+        <Route path="/profile" element={<PrivateRoute><Profile /></PrivateRoute>} />
+      </Routes>
+      <ToastContainer />
     </div>
   );
 }
