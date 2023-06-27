@@ -63,7 +63,7 @@ const NavBar = () => {
           </Box>
           {isAuth ?
             <>
-              <span>Bienvenue {user.firstName}</span>
+              <span>Bienvenue</span>
               <Button variant="contained"
               onClick={logout}>
                 Logout
